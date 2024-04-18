@@ -10,5 +10,6 @@
                     </span>
                 </div>
         @endforelse
+        {{ $this->todos->links() }}
     </div>
 </div>
