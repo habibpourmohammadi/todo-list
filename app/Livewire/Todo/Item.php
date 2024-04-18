@@ -25,11 +25,21 @@ class Item extends Component
             "completion_status" => $todo->completion_status == "completed" ? "not_completed" : "completed"
         ]);
 
-        // Dispatch the "update-list" event to update the todo list
+        // Dispatch the "update-list" and "update-item" events to update the todo list
+        $this->dispatch("update-list");
+        $this->dispatch("update-item");
+    }
+
+    /**
+     * Delete the specified todo item.
+     */
+    public function delete(Todo $todo)
+    {
+        $todo->delete();
         $this->dispatch("update-list");
     }
 
-    #[On("update-list")]
+    #[On("update-item")]
     public function render()
     {
         return view("livewire.todo.item");
