@@ -14,6 +14,14 @@ class Create extends Component
     #[Validate("required|min:2|max:150")]
     public string $task;
 
+
+    /**
+     * The filter value for the todos.
+     *
+     * @var string
+     */
+    public $filter;
+
     /**
      * Store a newly created todo item.
      *
@@ -37,5 +45,16 @@ class Create extends Component
 
         // Dispatches the "update-list" event.
         $this->dispatch("update-list");
+    }
+
+
+    /**
+     * Send the filter value to update the filter.
+     *
+     * @return void
+     */
+    public function sendFilter()
+    {
+        $this->dispatch("update-filter", $this->filter);
     }
 }

@@ -14,16 +14,17 @@
             @enderror
             <div class="mt-1">
                 @if (session('success-alert'))
-                <span class="text-green-500 font-bold ms-1 font-mono"><small>{{ session('success-alert') }}</small></span>
+                    <span
+                        class="text-green-500 font-bold ms-1 font-mono"><small>{{ session('success-alert') }}</small></span>
                 @endif
             </div>
         </section>
         <section class="xl:ms-2">
-            <select id="countries"
+            <select wire:change="sendFilter" wire:model="filter" id="countries"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                <option>All</option>
-                <option>Completed</option>
-                <option>Not completed</option>
+                <option value="all">All</option>
+                <option value="completed">Completed</option>
+                <option value="not_completed">Not completed</option>
             </select>
         </section>
     </form>
