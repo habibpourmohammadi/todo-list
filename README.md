@@ -9,7 +9,7 @@
 ### Installation and Setup
 - **Clone the repository:**
     ```bash
-    git clone https://github.com/habibpourmohammadi/todo-list
+    git clone https://github.com/habibpourmohammadi/todo-list.git
     ```
 
 - **Navigate to the project directory:**
