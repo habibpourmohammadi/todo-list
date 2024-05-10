@@ -3,7 +3,7 @@
 این پروژه یک Todo List ساده است که با استفاده از Laravel و Livewire ساخته شده است. در این Todo List می‌توانید تسک‌های خود را ایجاد، ویرایش، حذف و تغییر وضعیت دهید. همچنین امکان فیلتر کردن لیست تسک‌ها بر اساس وضعیت آن‌ها و صفحه‌بندی با استفاده از pagination نیز وجود دارد. تمامی عملیات در این پروژه به صورت real-time و بدون نیاز به ریلود صفحه انجام می‌شوند.
 
 
-![todo list](https://s8.uupload.ir/files/scrnli_4_18_2024_3-23-34_pm_e38i.png)
+![todo list](https://i.ibb.co/1vYD0dS/scrnli-4-18-2024-3-23-34-PM.png)
 
 
 ### Installation and Setup
