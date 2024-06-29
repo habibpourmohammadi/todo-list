@@ -33,22 +33,6 @@ class Item extends Component
     public string $task;
 
     /**
-     * Change the completion status of a todo task.
-     */
-    public function changeStatus(Todo $todo)
-    {
-        // Update the completion status of the todo task
-        $todo->update([
-            "completion_status" => $todo->completion_status == "completed" ? "not_completed" : "completed"
-        ]);
-
-        // Dispatch the "update-list" and "update-item" events to update the todo list
-        $this->dispatch("update-list");
-        $this->dispatch("update-item");
-    }
-
-
-    /**
      * Toggles the update status.
      *
      * @return void
@@ -75,23 +59,14 @@ class Item extends Component
             "task" => $this->task
         ]);
 
-        // Dispatches the update-item event
-        $this->dispatch("update-item");
+        // Dispatches an "update-item" event for the specific to-do item to the current component
+        $this->dispatch("update-item-" . $todo->id)->self();
 
         // Resets the updateStatus and task properties
         $this->reset("updateStatus", "task");
     }
 
-    /**
-     * Delete the specified todo item.
-     */
-    public function delete(Todo $todo)
-    {
-        $todo->delete();
-        $this->dispatch("update-list");
-    }
-
-    #[On("update-item")]
+    #[On("update-item-{todo.id}")]
     public function render()
     {
         return view("livewire.todo.item");

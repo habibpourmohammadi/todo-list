@@ -20,7 +20,7 @@
             </div>
         </section>
         <section class="xl:ms-2">
-            <select wire:change="sendFilter" wire:model="filter" id="countries"
+            <select wire:change="$parent.setFilter($event.target.value)" id="countries"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 <option value="all">All</option>
                 <option value="completed">Completed</option>

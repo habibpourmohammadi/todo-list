@@ -3,12 +3,13 @@
 namespace App\Livewire\Todo;
 
 use App\Models\Todo;
-use Livewire\Attributes\Computed;
-use Livewire\Attributes\On;
 use Livewire\Component;
+use App\Livewire\Todo\Item;
+use Livewire\Attributes\On;
 use Livewire\WithPagination;
+use Livewire\Attributes\Computed;
 
-class Show extends Component
+class Index extends Component
 {
     use WithPagination;
 
@@ -23,19 +24,27 @@ class Show extends Component
         null
     ];
 
-
     /**
-     * Handle the update-filter event.
-     *
-     * @param mixed|null $filter
-     * @return void
+     * Change the completion status of a todo task.
      */
-    #[On("update-filter")]
-    public function changeFilter($filter = null)
+    public function changeStatus(Todo $todo)
     {
-        $this->setFilter($filter);
+        // Update the completion status of the todo task
+        $todo->update([
+            "completion_status" => $todo->completion_status == "completed" ? "not_completed" : "completed"
+        ]);
+
+        // Dispatches an "update-item" event to the Item class for the specific to-do item
+        $this->dispatch("update-item-" . $todo->id)->to(Item::class);
     }
 
+     /**
+     * Delete the specified todo item.
+     */
+    public function delete(Todo $todo)
+    {
+        $todo->delete();
+    }
 
     /**
      * Set the filter based on the provided value.
@@ -43,7 +52,7 @@ class Show extends Component
      * @param mixed|null $filter
      * @return void
      */
-    private function setFilter($filter = null)
+    public function setFilter($filter = null)
     {
         switch ($filter) {
             case 'all':
@@ -72,14 +81,18 @@ class Show extends Component
         }
     }
 
-
     /**
      * Retrieve the list of todos based on the current filter query.
      */
-    #[On("update-list")]
+    #[On("update-todos")]
     #[Computed()]
     public function todos()
     {
         return Todo::latest()->where($this->query[0], $this->query[1], $this->query[2])->paginate(5);
+    }
+
+    public function render()
+    {
+        return view('livewire.todo.index');
     }
 }

@@ -43,8 +43,8 @@ class Create extends Component
         // Reset the task input field
         $this->reset("task");
 
-        // Dispatches the "update-list" event.
-        $this->dispatch("update-list");
+        // Dispatches the "update-todos" event.
+        $this->dispatch("update-todos");
     }
 
 
